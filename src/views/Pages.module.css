@@ -1,0 +1,25 @@
+.home {
+  padding-left: 15px;
+}
+.button {
+  margin-left: 15px;
+}
+.movie {
+  display: flex;
+  box-shadow: 0px 2px 2px 0px #2a363b70;
+  padding: 15px;
+}
+.poster {
+  width: 350px;
+  height: 350px;
+}
+.title {
+  margin-top: 0;
+}
+.info {
+  box-shadow: 0px 2px 2px 0px #2a363b70;
+  padding: 15px;
+}
+.infoTitle {
+  margin-top: 0;
+}
