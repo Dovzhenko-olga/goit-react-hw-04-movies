@@ -14,8 +14,15 @@ export default function MovieDetailsPage() {
      <>
       {actors && 
         <ul className={styles.list}>
-          {actors.cast.map(({id, name, character}) => 
-          <li key={id} className={styles.item}>{name} <br/> {`Character: ${character}`}</li>)}
+        {actors.cast.map(({ id, name, profile_path, character }) =>
+          <li key={id} className={styles.item}>
+            <img
+                  src={`https://image.tmdb.org/t/p/w185/${profile_path ?? 'tzve3LD534wsCnhOrSqgJ1mnRma.jpg'}`}
+                  alt="name"
+              />
+            <p>{name}</p>
+            <p>{`Character: ${character}`}</p>
+          </li>)}
         </ul>}
     </>
   );

@@ -3,15 +3,13 @@ import { Link, useLocation, useHistory } from 'react-router-dom';
 import * as moviesAPI from '../services/movie-api';
 import qs from 'query-string';
 
-// fetchQuery
-
 export default function MoviesPage() {
   const { pathname, search } = useLocation();
   const history = useHistory();
   const [value, setValue] = useState(qs.parse(search)?.query || '');
   const [movies, setMovies] = useState(null);
 
-  const searchQuery = (e) => {
+  const handleChange = e => {
     setValue(e.target.value);
     history.push({
       pathname,
@@ -19,14 +17,27 @@ export default function MoviesPage() {
     });
   };
 
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    if (value.trim() === '') {
+      return alert('Enter a value to search.');
+    }
+    handleChange(value);
+    setValue('')
+  }
+
   useEffect((value) => {
-    moviesAPI.fetchQuery(value).then(console.log);
+    moviesAPI.fetchQuery(value).then(data => setMovies(data.results));
   }, [value]);
 
   return (
     <>
-      <input type="text" value={value} onChange={searchQuery}/>
+      <form onSubmit={handleSubmit}>
+      <input type="text" value={value} placeholder="Search movies" onChange={handleChange}/>
       <button type="submit">Search</button>
+      </form>
       {movies && (
           <ul>
           {movies.map(({id, title, name, original_title}) =>
@@ -34,7 +45,7 @@ export default function MoviesPage() {
                <Link to={{
                 pathname: `/movies/${id}`,
                 state: {
-                  backUrl: '/',
+                  backUrl: pathname,
                 },
               }}>
                  {title ?? name ?? original_title}

@@ -23,3 +23,14 @@
 .infoTitle {
   margin-top: 0;
 }
+.genresList {
+  display: flex;
+}
+.genresItem {
+  margin-right: 10px;
+}
+.noPoster {
+  width: 235px;
+  height: 350px;
+  background-color: gray;
+}

@@ -3,4 +3,19 @@
 }
 .item {
   margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.item img {
+  width: 150px;
+  height: 225px;
+}
+.item p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.item div {
+  width: 150px;
+  height: 225px;
+  background-color: gray;
 }

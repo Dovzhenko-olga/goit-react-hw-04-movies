@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import * as moviesAPI from '../services/movie-api';
 import styles from './Pages.module.css';
 
 export default function HomePage() {
   const [movies, setMovies] = useState(null);
+  const {pathname} = useLocation();
 
   useEffect(() => {
     moviesAPI.fetchMoviesTrending().then(data => setMovies(data.results));
@@ -20,7 +21,7 @@ export default function HomePage() {
                <Link to={{
                 pathname: `/movies/${id}`,
                 state: {
-                  backUrl: '/',
+                  backUrl: pathname,
                 },
               }}>
                  {title ?? name ?? original_title}
