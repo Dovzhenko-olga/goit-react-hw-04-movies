@@ -7,37 +7,45 @@ export default function MoviesPage() {
   const { pathname, search } = useLocation();
   const history = useHistory();
   const [value, setValue] = useState(qs.parse(search)?.query || '');
-  const [movies, setMovies] = useState(null);
-
+  const [movies, setMovies] = useState('');
+  
+  
   const handleChange = e => {
+    
     setValue(e.target.value);
     history.push({
       pathname,
       search: `?query=${e.target.value}`,
     });
   };
-
-
-  const handleSubmit = e => {
-    e.preventDefault();
-
-    if (value.trim() === '') {
-      return alert('Enter a value to search.');
+  
+  useEffect(() => {
+    if (value === '') {
+      return;
     }
-    handleChange(value);
-    setValue('')
-  }
-
-  useEffect((value) => {
-    moviesAPI.fetchQuery(value).then(data => setMovies(data.results));
+    moviesAPI.fetchQuery(value)
+      .then(data => {
+        setMovies(data.results);
+      })
+      .catch(error => console.log(error));
   }, [value]);
+
+  // const handleSubmit = e => {
+  //   e.preventDefault();
+
+  //   if (value.trim() === '') {
+  //     return alert('Enter a value to search.');
+  //   }
+  //   handleChange(value);
+  //   setValue('')
+  // }
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      {/* <form onSubmit={handleSubmit}> */}
       <input type="text" value={value} placeholder="Search movies" onChange={handleChange}/>
       <button type="submit">Search</button>
-      </form>
+      {/* </form> */}
       {movies && (
           <ul>
           {movies.map(({id, title, name, original_title}) =>
