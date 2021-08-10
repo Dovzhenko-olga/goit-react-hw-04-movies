@@ -11,7 +11,7 @@ const Reviews = lazy(() => import('../components/Reviews/Reviews.js' /* webpackC
 
 export default function MovieDetailsPage() {
   const history = useHistory();
-  const {state, pathname} = useLocation();
+  const { state } = useLocation();
   const { url, path } = useRouteMatch();
   const {movieId} = useParams();
   const [movie, setMovie] = useState(null);
@@ -21,15 +21,10 @@ export default function MovieDetailsPage() {
   }, [movieId]);
 
   const onBackClick = () => {
-    history.push({
-      pathname: state?.backUrl ?? '/',
-      // search: `query=${state.value}`,
-    });
-    // console.log(history);
-    // console.log(state);
+    history.push(state.backUrl);
   };
-  
-  return (
+
+    return (
     <>
       {movie && <>
         <button type="button" className={styles.button} onClick={onBackClick}>&#8701; Go back</button>
@@ -42,7 +37,7 @@ export default function MovieDetailsPage() {
           
           <div className={styles.description}>
             <h1 className={styles.title}>{movie.title}</h1>
-            <p>User Score: {movie.vote_average}%</p>
+            <p>User Score: {movie.vote_average * 10}%</p>
             <h2>Overview</h2>
             <p>{movie.overview}</p>
             <h3>Genres</h3>
@@ -61,7 +56,7 @@ export default function MovieDetailsPage() {
               <Link to={{
                 pathname: `${url}/cast`,
                 state: {
-                  backUrl: pathname,
+                  backUrl: state.backUrl,
                 },
               }}>Cast</Link>
             </li>
@@ -69,7 +64,7 @@ export default function MovieDetailsPage() {
               <Link to={{
                 pathname: `${url}/reviews`,
                 state: {
-                  backUrl: pathname,
+                  backUrl: state.backUrl,
                 },
               }}>Reviews</Link>
             </li>

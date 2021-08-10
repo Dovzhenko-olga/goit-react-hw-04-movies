@@ -25,5 +25,6 @@ export function fetchReviews(movieId) {
 }
 
 export function fetchQuery(value) {
-  return fetchMovies(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${value}`);
+  return fetchMovies(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${value}`)
+    // .then((response) => response.data.results);
 }
