@@ -5,9 +5,16 @@ import * as moviesAPI from '../services/movie-api';
 // import Cast from '../components/Cast/Cast';
 // import Reviews from '../components/Reviews/Reviews';
 import styles from './Pages.module.css';
+import { css } from "@emotion/react";
+import {PulseLoader} from "react-spinners";
 
 const Cast = lazy(() => import('../components/Cast/Cast.js' /* webpackChunkName: "Cast" */));
 const Reviews = lazy(() => import('../components/Reviews/Reviews.js' /* webpackChunkName: "Reviews" */));
+const override = css`
+  display: block;
+  margin: 25px auto;
+  border-color: red;
+`;
 
 export default function MovieDetailsPage() {
   const history = useHistory();
@@ -29,11 +36,12 @@ export default function MovieDetailsPage() {
       {movie && <>
         <button type="button" className={styles.button} onClick={onBackClick}>&#8701; Go back</button>
         <div className={styles.movie}>
-          <img
+          <div className={styles.thumb}>
+            <img
               className={styles.poster}
               src={`https://image.tmdb.org/t/p/w500/${movie.poster_path ?? 'tzve3LD534wsCnhOrSqgJ1mnRma.jpg'}`}
               alt={movie.title ?? movie.name ?? movie.original_title} />
-         
+          </div>
           
           <div className={styles.description}>
             <h1 className={styles.title}>{movie.title}</h1>
@@ -50,27 +58,29 @@ export default function MovieDetailsPage() {
           </div>
         </div>
         <div className={styles.info}>
-          <p className={styles.infoTitle}>Additional information</p>
+          <h2 className={styles.infoTitle}>Additional information</h2>
           <ul>
-            <li>
+            <li className={styles.infoList}>
               <Link to={{
                 pathname: `${url}/cast`,
                 state: {
                   backUrl: state.backUrl,
                 },
-              }}>Cast</Link>
+              }} className={styles.infoLink}>Cast</Link>
             </li>
-            <li>
+            <li className={styles.infoList}>
               <Link to={{
                 pathname: `${url}/reviews`,
                 state: {
                   backUrl: state.backUrl,
                 },
-              }}>Reviews</Link>
+              }} className={styles.infoLink}>Reviews</Link>
             </li>
           </ul>
         </div>
-        <Suspense fallback={<div>...</div>}>
+        <Suspense fallback={
+          <PulseLoader color="#079ada" css={override} size={15} />
+        }>
         <Route path={`${path}/cast`} exact>
           <Cast />
         </Route>

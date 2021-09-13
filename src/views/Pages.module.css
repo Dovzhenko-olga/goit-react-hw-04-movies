@@ -1,27 +1,97 @@
 .home {
   padding-left: 15px;
+  text-align: center;
+}
+.home h1 {
+  margin-bottom: 0;
+  font-size: 2.4rem;
+  text-shadow: 1px 2px 2px #1a32a9, 3px 3px 3px #bb0b6b;
+}
+.trendingList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
+.trendingItem {
+  width: 330px;
+  margin: 15px;
+  background-color: #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 1px 5px 0px #2a363b, 0px 1px 5px 3px #2a363b;
+  transition: transform 250ms cubic-bezier(0.075, 0.82, 0.165, 1),
+    box-shadow 250ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.trendingItem:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 1px 5px 0px #2a363b, 0px 1px 5px 3px #2a363b,
+    6px -5px 7px 1px #bb0b6b;
+}
+.name {
+  margin: 0;
+  padding: 10px;
+  color: black;
+  font-size: 1.4rem;
+  font-weight: 700;
+  word-wrap: normal;
+  text-shadow: 1px 2px 2px #1a32a9;
 }
 .button {
   margin-left: 15px;
+  padding: 5px;
+  background-color: #9fa1aa80;
+  border-radius: 4px;
+  border: 3px solid #aba3a3;
+  box-shadow: inset 0px 1px 5px 0px #92999c;
+  cursor: pointer;
+  transition: background-color 250ms cubic-bezier(0.075, 0.82, 0.165, 1),
+    border 250ms cubic-bezier(0.075, 0.82, 0.165, 1),
+    box-shadow 250ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.button:hover {
+  background-color: #079ada;
+  border: 3px solid #0d5777;
+  box-shadow: inset 0px 1px 5px 0px #0d5777;
 }
 .movie {
   display: flex;
-  box-shadow: 0px 2px 2px 0px #2a363b70;
+  flex-direction: column;
+  box-shadow: 0px 2px 0px 0px #2a363b70;
   padding: 15px;
 }
+.thumb {
+  margin-right: 10px;
+}
+.thumb .poster {
+  border-radius: 5px;
+}
 .poster {
-  width: 350px;
+  width: 100%;
   height: 350px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 .title {
   margin-top: 0;
 }
 .info {
-  box-shadow: 0px 2px 2px 0px #2a363b70;
+  box-shadow: 0px 2px 0px 0px #2a363b70;
   padding: 15px;
 }
 .infoTitle {
   margin-top: 0;
+}
+.infoList {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: black;
+}
+.infoLink {
+  color: inherit;
+}
+.infoLink:hover {
+  color: #079ada;
 }
 .genresList {
   display: flex;
@@ -33,4 +103,52 @@
   width: 235px;
   height: 350px;
   background-color: gray;
+}
+.input {
+  width: 300px;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 10px;
+  padding: 5px;
+  background-color: #d8dae680;
+  outline: none;
+  border-radius: 4px;
+  border: 3px solid #aba3a3;
+  box-shadow: inset 0px 1px 5px 0px #92999c;
+}
+.input:focus {
+  border: 3px solid #81939a;
+}
+.loader {
+  margin-top: 25px;
+}
+
+@media screen and (max-width: 320px) {
+  .input {
+    width: 90%;
+  }
+}
+@media screen and (min-width: 480px) {
+  .input {
+    margin: 0;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .trendingItem {
+    width: 320px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .thumb {
+    max-width: 300px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .movie {
+    flex-direction: row;
+  }
+  .thumb {
+    min-width: 300px;
+    margin-right: 25px;
+  }
 }

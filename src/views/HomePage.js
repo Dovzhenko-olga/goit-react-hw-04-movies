@@ -15,16 +15,20 @@ export default function HomePage() {
     <div className={styles.home}>
     <h1>Trending today</h1>
       {movies && (
-          <ul>
-          {movies.map(({id, title, name, original_title}) =>
-            <li key={id}>
+          <ul className={styles.trendingList}>
+          {movies.map(({id, title, name, original_title, poster_path}) =>
+            <li key={id} className={styles.trendingItem}>
                <Link to={{
                 pathname: `/movies/${id}`,
                 state: {
                   backUrl: pathname,
                 },
               }}>
-                 {title ?? name ?? original_title}
+                <img
+              className={styles.poster}
+              src={`https://image.tmdb.org/t/p/w500/${poster_path ?? 'tzve3LD534wsCnhOrSqgJ1mnRma.jpg'}`}
+              alt={title ?? name ?? original_title} />
+                 <p className={styles.name}>{title ?? name ?? original_title}</p>
                 </Link>
             </li>)}
         </ul>

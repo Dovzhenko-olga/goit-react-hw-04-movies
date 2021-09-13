@@ -1,13 +1,36 @@
 .link {
+  margin: 5px 10px;
   display: inline-block;
+  font-size: 1.6rem;
+  font-weight: 900;
   text-decoration: none;
-  padding: 12px;
-  font-weight: 500;
-  color: #2a363b;
-  font-size: 18px;
+  text-transform: uppercase;
+  padding: 3px;
+  color: #079ada;
+  border: 3px solid #079ada;
+  border-radius: 5px;
 }
-
+.link:hover {
+  color: #ddc2e0;
+  border-color: #ddc2e0;
+}
 .activeLink {
   composes: link;
-  color: red;
+  color: #00ffbf;
+  border-color: #00ffbf;
+}
+
+@media screen and (min-width: 768px) {
+  .link {
+    font-size: 2rem;
+    padding: 5px;
+    border-width: 5px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .link {
+    font-size: 2.2rem;
+    padding: 10px;
+  }
 }

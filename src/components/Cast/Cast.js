@@ -20,8 +20,10 @@ export default function MovieDetailsPage() {
                   src={`https://image.tmdb.org/t/p/w185/${profile_path ?? 'tzve3LD534wsCnhOrSqgJ1mnRma.jpg'}`}
                   alt="name"
               />
-            <p>{name}</p>
-            <p>{`Character: ${character}`}</p>
+            <div className={styles.discription}>
+              <p>{name}</p>
+              <p>{`Character: ${character}`}</p>
+            </div>
           </li>)}
         </ul>}
     </>

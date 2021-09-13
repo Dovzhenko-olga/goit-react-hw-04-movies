@@ -16,7 +16,10 @@ export default function MovieDetailsPage() {
       {reviews && (reviews.results.length > 0
         ? (<ul className={styles.list}>
           {reviews.results.map(({ id, author, content }) =>
-            <li key={id} className={styles.item}>{`Author: ${author}`} <br /> {content}</li>)}
+            <li key={id} className={styles.item}>
+              <p className={styles.author}>{`Author: ${author}`}</p>
+              {content}
+            </li>)}
         </ul>)
         : <p className={styles.notice}>We don't have any reviews for this movie.</p>)}
     </>

@@ -1,7 +1,18 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useHistory, useRouteMatch } from 'react-router-dom';
 import * as moviesAPI from '../services/movie-api';
+import styles from './Pages.module.css';
 import qs from 'query-string';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const options = {
+    autoClose: 3000,
+    hideProgressBar: false,
+    position: toast.POSITION.TOP_RIGHT,
+    pauseOnHover: true,
+    closeOnClick: true,
+};
 
 export default function MoviesPage() {
   const { url } = useRouteMatch();
@@ -13,7 +24,7 @@ export default function MoviesPage() {
   const handleSubmit = e => {
     e.preventDefault();
     if (e.target.elements.searching.value.trim() === '') {
-      return alert('Enter a value to search.');
+      return toast('Enter a value to search!', options);
     }
     history.push({
       ...location,
@@ -36,20 +47,24 @@ export default function MoviesPage() {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Search movies" name="searching"/>
-      <button type="submit">Search</button>
+        <input type="text" placeholder="Search movies" name="searching" className={styles.input}/>
+      <button type="submit" className={styles.button}>Search</button>
       </form>
       {movies && (
-          <ul>
-          {movies.map(({id, title, name, original_title}) =>
-            <li key={id}>
+        <ul className={styles.trendingList}>
+          {movies.map(({id, title, name, original_title, poster_path}) =>
+            <li key={id} className={styles.trendingItem}>
                <Link to={{
                 pathname: `${url}/${id}`,
                 state: {
                   backUrl: location,
                 },
               }}>
-                 {title ?? name ?? original_title}
+                 <img
+              className={styles.poster}
+              src={`https://image.tmdb.org/t/p/w500/${poster_path ?? 'tzve3LD534wsCnhOrSqgJ1mnRma.jpg'}`}
+              alt={title ?? name ?? original_title} />
+                 <p className={styles.name}>{title ?? name ?? original_title}</p>
                 </Link>
             </li>)}
         </ul>
